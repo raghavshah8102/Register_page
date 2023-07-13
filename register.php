@@ -1,0 +1,21 @@
+<?php include "db.php";
+
+if(isset($_POST['submit'])){
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile_no'];
+    $DOB = $_POST['dob'];
+    $city = $_POST['city'];
+    
+    $query = "INSERT INTO `login`(`name`, `email`, `mobile_no`, `dob`, `city`) VALUES ('$name','$email','$mobile','$DOB','$city')";  
+    $result = mysqli_query($connection,$query);
+    if(!$result){
+                echo "Data is not updated" . mysqli_error($connection);
+    }else{
+        echo "<script>alert('Data has been updated')</script>";
+        header("Location:formpage.php");
+    }
+    }
+
+?>

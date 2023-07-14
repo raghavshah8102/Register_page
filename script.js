@@ -26,7 +26,7 @@ $(document).ready(function(){
     });
 
     $('#registration-form').on('submit',function(e){
-        // e.preventDefault();
+        e.preventDefault();
 
         validateFullName();
         validateEmail();
@@ -34,6 +34,23 @@ $(document).ready(function(){
         validateDOB();
         validateCity();
 
+        if($('.error:visible').length === 0){
+
+        data =  $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: 'register.php',
+            data: data,
+            success: function(response)
+            {
+                $('#registration-form')[0].reset();
+                alert(response);
+           },
+           error : function(error) {
+            console.log(error);
+           }
+       });
+        }
     });
 
 

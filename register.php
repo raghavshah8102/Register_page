@@ -1,6 +1,6 @@
 <?php include "db.php";
 
-if(isset($_POST['submit'])){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -10,12 +10,13 @@ if(isset($_POST['submit'])){
     
     $query = "INSERT INTO `login`(`name`, `email`, `mobile_no`, `dob`, `city`) VALUES ('$name','$email','$mobile','$DOB','$city')";  
     $result = mysqli_query($connection,$query);
-    if(!$result){
-                echo "Data is not updated" . mysqli_error($connection);
+    if($result){
+        $response = "form submitted";
     }else{
-        echo "<script>alert('Data has been updated')</script>";
-        header("Location:formpage.php");
+        $response = "form is not submitted please check your values";
     }
-    }
+}
+
+echo $response;
 
 ?>

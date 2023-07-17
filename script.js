@@ -58,12 +58,15 @@ $(document).ready(function(){
         var fullName = $('#name').val();
         if(fullName === ''){
             $('#name-error').text('Full name is required!').show();
+        }else if(!isValidFullName(fullName)){
+            $('#name-error').text("Full Name should only contain characters!").show();
         }else{
             $('#name-error').hide();
         }
     }
-    function isValidFullName(){
-        $('#name-error').css({'display':'none'});
+    function isValidFullName(fullName){
+        // $('#name-error').css({'display':'none'});
+        return /^[A-Za-z\s]*$/.test(fullName);
     }
 
     function validateEmail(){
@@ -120,8 +123,14 @@ $(document).ready(function(){
         var city = $('#city').val();
         if(city === ''){
             $('#city-error').text("City is required!").show();
+        }else if(!isValidCity(city)){
+            $('#city-error').text('City should only contain characters!').show();
         }else{
             $('#city-error').hide();
         }
+    }
+    function isValidCity(city){
+        // $('#name-error').css({'display':'none'});
+        return /^[A-Za-z\s]*$/.test(city);
     }
 })
